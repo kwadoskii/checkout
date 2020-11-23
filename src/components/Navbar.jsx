@@ -1,11 +1,11 @@
 import React from "react";
-import { Link, NavLink, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar({ cart }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
       <Link to="/" className="navbar-brand">
-        MyStore
+        Store R Us
       </Link>
 
       <Link className="ml-auto text-muted" style={{ fontSize: "1.4em" }} to="/cart">
