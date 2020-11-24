@@ -70,7 +70,7 @@ export default function Cart({
             ))}
           </div>
 
-          <div className="col-md-4 ml-auto my-3">
+          <div className="ml-auto pr-2 my-3">
             <b style={{ fontSize: 18 }}>
               Total:{" "}
               <span className="cart-unit-total mx-2" style={{ fontSize: 22 }}>
