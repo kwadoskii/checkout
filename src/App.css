@@ -3,3 +3,30 @@
   flex-flow: column;
   justify-content: space-between;
 }
+
+.cart-image {
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  height: 90px !important;
+  margin: 20px 0;
+}
+
+.cart-title {
+  font-weight: 500;
+}
+
+.cart-unit-price,
+.cart-unit-total {
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.cart-unit-total {
+  font-weight: 500;
+  color: rgb(230, 111, 0);
+}
+
+.card-shadow {
+  box-shadow: 10px 10px 20px #00000045;
+}

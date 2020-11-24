@@ -17,7 +17,10 @@ export default function Store({ history, handleCart }) {
   }, []);
 
   return (
-    <div className="row my-4">
+    <div
+      className="row my-4"
+      style={{ flexFlow: "row wrap", justifyContent: "space-evenly" }}
+    >
       {products.map((product) => (
         <Product
           key={product.id}

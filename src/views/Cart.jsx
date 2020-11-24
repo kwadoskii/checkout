@@ -12,49 +12,86 @@ export default function Cart({
   totalPrice,
 }) {
   return (
-    <div style={{ flex: 1 }}>
-      <h3>Cart </h3>
-      <div className="row">
-        <div className="col-md-12">
-          {cart.map((c, i) => (
-            <Fragment key={i}>
-              <div className="fa fa-times" onClick={() => removeFromCart(c)}></div>
-              <p className="row">
-                <span className="m-4 col-md-7">{c.title}</span>
-                <span className="col-md-3 row">
-                  <span className="m-4 col-md-5">Price: {c.price}</span>
-                  <Button
-                    disabled={c.quantity === 1 && true}
-                    name="-"
-                    onClick={() => decreaseItem(c)}
-                  />
-                  <span className="badge badge-info mx-3">{c.quantity}</span>
-                  <Button name="+" onClick={() => increaseItem(c)} />
-                </span>
-                <span className="mx-3 col-md-1">
-                  {formatCurrency(c.quantity * c.price)}
-                </span>
-              </p>
-            </Fragment>
-          ))}
-        </div>
+    <div style={{ flex: 1 }} className="mb-5">
+      <div className="container">
+        <h3 className="font-weight-lighter">My cart</h3>
+        <div className="row">
+          <div className="col-md-12">
+            {cart.map((c, i) => (
+              <Fragment key={i}>
+                <div className="col-md-12 bg-white my-4 p-3 rounded row card-shadow">
+                  <div
+                    className="col-md-2 cart-image"
+                    style={{
+                      background: `url(${c.image})`,
+                    }}
+                  ></div>
 
-        <div className="col-md-2 offset-md-10">
-          <p>Total: {formatCurrency(totalPrice)}</p>
-        </div>
+                  <div className="col-md-3">
+                    <p className="mt-3 cart-title">{c.title}</p>
+                    <Button
+                      classes="btn-outline-danger"
+                      name="remove"
+                      onClick={() => removeFromCart(c)}
+                    />
+                  </div>
 
-        <div className="col-md-12">
-          <Button
-            classes="btn-warning col-md-3 offset-md-9"
-            disabled={cart.length === 0 && true}
-            name="Checkout"
-            onClick={() =>
-              history.push({
-                pathname: "/checkout",
-                state: { totalPrice },
-              })
-            }
-          />
+                  <div className="col-md-3">
+                    <div className="col-md-12  mt-1">
+                      <Button
+                        classes="btn-success"
+                        disabled={c.quantity === 1 && true}
+                        name="-"
+                        onClick={() => decreaseItem(c)}
+                      />
+                      <p
+                        className="badge badge-info mx-3"
+                        style={{ fontSize: "initial" }}
+                      >
+                        {c.quantity}
+                      </p>
+                      <Button
+                        classes="btn-success"
+                        name="+"
+                        onClick={() => increaseItem(c)}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-md-2 mt-1 cart-unit-price">
+                    <p>{formatCurrency(c.price)}</p>
+                  </div>
+
+                  <div className="col-md-2 mt-1 cart-unit-total">
+                    <p>{formatCurrency(c.quantity * c.price)}</p>
+                  </div>
+                </div>
+              </Fragment>
+            ))}
+          </div>
+
+          <div className="col-md-4 ml-auto my-3">
+            <b style={{ fontSize: 18 }}>
+              Total:{" "}
+              <span className="cart-unit-total mx-2" style={{ fontSize: 22 }}>
+                {formatCurrency(totalPrice)}
+              </span>
+            </b>
+          </div>
+
+          <div className="col-md-12">
+            <Button
+              classes="btn-warning col-md-3 offset-md-9"
+              disabled={cart.length === 0 && true}
+              name="Checkout"
+              onClick={() =>
+                history.push({
+                  pathname: "/checkout",
+                  state: { totalPrice },
+                })
+              }
+            />
+          </div>
         </div>
       </div>
     </div>

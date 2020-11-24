@@ -5,7 +5,10 @@ import currencyFormatter from "../helpers/currencyFormatter";
 
 export default function Product({ data, handleCart }) {
   return (
-    <div className="card mb-5 col-md-4 col-sm-6" style={{ cursor: "pointer" }}>
+    <div
+      className="card mb-5 col-md-4 col-sm-6 card-shadow"
+      style={{ cursor: "pointer", margin: 10, maxWidth: 350 }}
+    >
       <div
         className="card-img-top"
         style={{

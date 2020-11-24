@@ -93,7 +93,7 @@ function App() {
 
       <BrowserRouter>
         <Navbar cart={cart.length} />
-        <main className="container-fluid px-5 bg-light py-2">
+        <main className="container-fluid px-3 bg-light py-2">
           <Switch>
             <Route
               path="/"
