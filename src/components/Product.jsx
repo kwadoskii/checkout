@@ -38,7 +38,7 @@ export default function Product({ data, handleCart }) {
           {/* <p className="card-text">{data.description.substring(0, 100)}</p> */}
         </div>
 
-        <Button name="Add to cart" onClick={handleCart} />
+        <Button name="ADD TO CART" onClick={handleCart} />
       </div>
     </div>
   );

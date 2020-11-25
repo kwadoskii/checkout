@@ -5,7 +5,7 @@ export default function Button({ name, onClick, classes = "", ...otherProps }) {
 
   return (
     <button className={classes} onClick={onClick} {...otherProps}>
-      {name.toUpperCase()}
+      {name}
     </button>
   );
 }

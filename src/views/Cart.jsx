@@ -19,7 +19,7 @@ export default function Cart({
   return (
     <div style={{ flex: 1 }} className="mb-5">
       <div className="container">
-        <h3 className="font-weight-lighter">My cart</h3>
+        <h3 className="font-weight-lighter text-center">My cart</h3>
         <div className="row">
           <div className="ml-auto pr-4">
             <Button
@@ -31,7 +31,7 @@ export default function Cart({
           <div className="col-md-12">
             {cart.map((c, i) => (
               <Fragment key={i}>
-                <div className="col-md-12 bg-white my-4 p-3 rounded row card-shadow">
+                <div className="bg-white my-4 p-3 rounded row card-shadow mx-2">
                   <div
                     className="col-md-2 cart-image"
                     style={{
@@ -97,7 +97,7 @@ export default function Cart({
               disabled={cart.length === 0 && true}
               name="Checkout"
               onClick={() =>
-                history.replace({
+                history.push({
                   pathname: "/checkout",
                   state: {
                     totalPrice: totalPrice.toLocaleString("en", {

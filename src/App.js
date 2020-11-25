@@ -98,7 +98,7 @@ function App() {
 
       <BrowserRouter>
         <Navbar cart={cart.length} />
-        <main className="container-fluid px-3 bg-light py-2">
+        <main className="container-fluid px-3 bg-light py-2" style={{ flex: 1 }}>
           <Switch>
             <Route
               path="/"
@@ -122,7 +122,12 @@ function App() {
             <Route
               path="/checkout"
               render={(props) => (
-                <Checkout {...props} clearCart={clearCart} totalPrice={totalPrice} />
+                <Checkout
+                  {...props}
+                  cart={cart}
+                  clearCart={clearCart}
+                  totalPrice={totalPrice}
+                />
               )}
             />
             <Route path="/not-found" component={NotFound} />

@@ -57,7 +57,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
           <p className="text-muted text-center mb-4">{`We've processed your payment of $${localTotalAmount}`}</p>
           <div className="row">
             <div className="ml-auto">
-              <a href={receiptUrl} target="_blank">
+              <a href={receiptUrl} target="_blank" rel="noreferrer">
                 <Button name="View Receipt" classes="btn-sm btn-success mr-2" />
               </a>
             </div>
@@ -101,7 +101,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
           </div>
         </div>
 
-        <div className="form-row">
+        <div className="form-row mt-3">
           <div className="form-group col-md-4">
             <label htmlFor="card-details">Card details</label>
             <CardNumberElement id="card-details" className="form-control" />
@@ -118,12 +118,27 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
           </div>
         </div>
 
-        <Button
-          className="btn-success col-md-6 offset-md-3 p-2 my-3"
-          disabled={loading}
-          name="pay"
-          type="submit"
-        />
+        <div className="form-row mt-3">
+          <Button
+            classes="btn-success col-md-6 offset-md-3 p-2 my-3"
+            disabled={loading}
+            name={
+              !loading ? (
+                "PAY"
+              ) : (
+                <>
+                  Processing{" "}
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                </>
+              )
+            }
+            type="submit"
+          />
+        </div>
       </form>
     </div>
   );
