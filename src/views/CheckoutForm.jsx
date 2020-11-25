@@ -41,7 +41,6 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
       setReceiptUrl(data.charge.receipt_url);
       clearCart();
     } catch (error) {
-      logger.log(error);
       console.log(error);
     }
 
@@ -54,7 +53,12 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
         <div className="col-md-4 mr-auto ml-auto bg-white p-5 rounded card-shadow">
           <i className="fas fa-check-circle text-center my-4 success-logo "></i>
           <h3 className="font-weight-lighter text-center mt-4">Payment Successful!</h3>
-          <p className="text-muted text-center mb-4">{`We've processed your payment of $${localTotalAmount}`}</p>
+          <p className="text-muted text-center mb-4">{`We've processed your payment of $${localTotalAmount.toLocaleString(
+            "en",
+            {
+              minimumFractionDigits: 2,
+            }
+          )}`}</p>
           <div className="row">
             <div className="ml-auto">
               <a href={receiptUrl} target="_blank" rel="noreferrer">
@@ -63,7 +67,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
             </div>
             <div className="mr-auto">
               <Link to="/">
-                <Button name="Back to Store" classes="btn-sm btn-link" />
+                <Button name="Back TO STORE" classes="btn-sm btn-link" />
               </Link>
             </div>
           </div>
@@ -83,6 +87,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
               className="form-control"
               id="email"
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="john.doe@example.com"
               type="email"
               required
               value={email}
@@ -94,6 +99,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
               className="form-control"
               id="name"
               onChange={(e) => setName(e.target.value)}
+              placeholder="John Doe"
               type="text"
               required
               value={name}

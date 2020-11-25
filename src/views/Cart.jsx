@@ -24,7 +24,7 @@ export default function Cart({
           <div className="ml-auto pr-4">
             <Button
               classes="btn-outline-danger"
-              name="Remove all"
+              name="REMOVE ALL"
               onClick={() => clearCart()}
             />
           </div>
@@ -43,7 +43,7 @@ export default function Cart({
                     <p className="mt-3 cart-title">{c.title}</p>
                     <Button
                       classes="btn-outline-danger"
-                      name="remove"
+                      name="REMOVE"
                       onClick={() => removeFromCart(c)}
                     />
                   </div>
@@ -95,7 +95,7 @@ export default function Cart({
             <Button
               classes="btn-warning col-md-3 offset-md-9"
               disabled={cart.length === 0 && true}
-              name="Checkout"
+              name="CHECKOUT"
               onClick={() =>
                 history.push({
                   pathname: "/checkout",
