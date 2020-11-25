@@ -1,21 +1,33 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 
 import Button from "../components/Button";
 import formatCurrency from "../helpers/currencyFormatter";
 
 export default function Cart({
   cart,
+  clearCart,
   increaseItem,
   decreaseItem,
   history,
   removeFromCart,
   totalPrice,
 }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div style={{ flex: 1 }} className="mb-5">
       <div className="container">
         <h3 className="font-weight-lighter">My cart</h3>
         <div className="row">
+          <div className="ml-auto pr-4">
+            <Button
+              classes="btn-outline-danger"
+              name="Remove all"
+              onClick={() => clearCart()}
+            />
+          </div>
           <div className="col-md-12">
             {cart.map((c, i) => (
               <Fragment key={i}>
@@ -85,9 +97,13 @@ export default function Cart({
               disabled={cart.length === 0 && true}
               name="Checkout"
               onClick={() =>
-                history.push({
+                history.replace({
                   pathname: "/checkout",
-                  state: { totalPrice },
+                  state: {
+                    totalPrice: totalPrice.toLocaleString("en", {
+                      minimumFractionDigits: 2,
+                    }),
+                  },
                 })
               }
             />

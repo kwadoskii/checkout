@@ -9,7 +9,7 @@ axios.interceptors.response.use(null, (error) => {
 
   if (!expectedError) {
     logger.log(error);
-    toast.error("An unexpected server error occurred.", { autoClose: false });
+    toast.error("An unexpected server error occurred.", { autoClose: 3000 });
   }
 
   return Promise.reject(error);

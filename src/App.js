@@ -62,18 +62,23 @@ function App() {
     cache.setLocalCart(newCart, setCart);
   };
 
-  const totalPrice = () => {
-    const newCart = [...cart];
+  const getTotalPrice = () => {
     let subTotal = 0;
-    newCart.forEach((cart) => {
+    cart.forEach((cart) => {
       subTotal += cart.price * cart.quantity;
     });
     return subTotal;
   };
 
+  const clearCart = () => {
+    cache.setLocalCart([], setCart);
+  };
+
   useEffect(() => {
     setCart(cache.getLocalCart);
   }, []);
+
+  const totalPrice = getTotalPrice();
 
   return (
     <>
@@ -106,14 +111,20 @@ function App() {
                 <Cart
                   {...props}
                   cart={cart}
+                  clearCart={clearCart}
                   decreaseItem={decreaseItem}
                   increaseItem={increaseItem}
                   removeFromCart={removeFromCart}
-                  totalPrice={totalPrice()}
+                  totalPrice={totalPrice}
                 />
               )}
             />
-            <Route path="/checkout" component={Checkout} />
+            <Route
+              path="/checkout"
+              render={(props) => (
+                <Checkout {...props} clearCart={clearCart} totalPrice={totalPrice} />
+              )}
+            />
             <Route path="/not-found" component={NotFound} />
             <Redirect to="/not-found" />
           </Switch>

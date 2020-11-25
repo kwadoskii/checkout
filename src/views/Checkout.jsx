@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { StripeProvider, Elements } from "react-stripe-elements";
 
-export default function Checkout({ location }) {
+import CheckoutForm from "./CheckoutForm";
+import { Redirect } from "react-router-dom";
+
+export default function Checkout({ clearCart, history, totalPrice }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // if (totalPrice === 0) return <Redirect to="/" />;
+  // const totalPrice = history.location.state.totalPrice;
+
   return (
     <>
-      <h2>Checkout</h2>
-      <p>{location.state.totalPrice}</p>
-      {/* <div className="d-flex justify-content-center">
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div> */}
+      <h3 className="font-weight-lighter">Checkout</h3>
+      <StripeProvider apiKey={process.env.REACT_APP_STRIPE_PK}>
+        <Elements>
+          <CheckoutForm clearCart={clearCart} history={history} totalPrice={totalPrice} />
+        </Elements>
+      </StripeProvider>
     </>
   );
 }

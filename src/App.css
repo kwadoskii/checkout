@@ -30,3 +30,7 @@
 .card-shadow {
   box-shadow: 10px 10px 20px #00000045;
 }
+
+.card.mb-5.col-md-4.col-sm-6.card-shadow:hover {
+  border: 2px solid darkgoldenrod;
+}
