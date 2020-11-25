@@ -41,7 +41,6 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
       setReceiptUrl(data.charge.receipt_url);
       clearCart();
     } catch (error) {
-      logger.log(error);
       console.log(error);
     }
 
@@ -63,7 +62,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
             </div>
             <div className="mr-auto">
               <Link to="/">
-                <Button name="Back to Store" classes="btn-sm btn-link" />
+                <Button name="Back TO STORE" classes="btn-sm btn-link" />
               </Link>
             </div>
           </div>
@@ -83,6 +82,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
               className="form-control"
               id="email"
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="john.doe@example.com"
               type="email"
               required
               value={email}
@@ -94,6 +94,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
               className="form-control"
               id="name"
               onChange={(e) => setName(e.target.value)}
+              placeholder="John Doe"
               type="text"
               required
               value={name}
