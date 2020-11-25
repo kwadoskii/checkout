@@ -18,6 +18,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
   const [receiptUrl, setReceiptUrl] = useState("");
 
   totalPrice = totalPrice.toLocaleString("en", {
@@ -27,6 +28,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      setLoading(true);
       const { token } = await stripe.createToken();
 
       const { data } = await paymentApi.pay({
@@ -41,13 +43,30 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
       logger.log(error);
       console.log(error);
     }
+
+    setLoading(false);
   };
 
   if (receiptUrl) {
     return (
-      <div className="success">
-        <h2>Payment Successful!</h2>
-        <a href={receiptUrl}>View Receipt</a> | <Link to="/">Back to Store</Link>
+      <div className="row">
+        <div className="col-md-4 mr-auto ml-auto bg-white p-5 rounded card-shadow">
+          <i className="fas fa-check-circle text-center my-4 success-logo "></i>
+          <h3 className="font-weight-lighter text-center mt-4">Payment Successful!</h3>
+          <p className="text-muted text-center mb-4">{`We've processed your charge for ${totalPrice}`}</p>
+          <div className="row">
+            <div className="ml-auto">
+              <a href={receiptUrl} target="_blank">
+                <Button name="View Receipt" classes="btn-sm btn-success mr-2" />
+              </a>
+            </div>
+            <div className="mr-auto">
+              <Link to="/">
+                <Button name="Back to Store" classes="btn-sm btn-link" />
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -84,22 +103,23 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
         <div className="form-row">
           <div className="form-group col-md-4">
             <label htmlFor="card-details">Card details</label>
-            <CardNumberElement id="card-details" />
+            <CardNumberElement id="card-details" className="form-control" />
           </div>
 
           <div className="form-group col-md-4">
             <label htmlFor="exp">Expiration date</label>
-            <CardExpiryElement id="exp" />
+            <CardExpiryElement id="exp" className="form-control" />
           </div>
 
           <div className="form-group col-md-4">
             <label htmlFor="cvc">CVC</label>
-            <CardCVCElement id="cvc" />
+            <CardCVCElement id="cvc" className="form-control" />
           </div>
         </div>
 
         <Button
           className="btn-success col-md-6 offset-md-3 p-2 my-3 order-button"
+          disabled={loading}
           name="pay"
           type="submit"
         />

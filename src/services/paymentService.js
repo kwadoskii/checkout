@@ -1,6 +1,6 @@
 import http from "../services/httpService";
 
-const endPoint = "http://localhost:7000/api/stripe/charge";
+const endPoint = "https://fathomless-refuge-58102.herokuapp.com/api/stripe/charge";
 
 const pay = (details) => {
   return http.post(endPoint, details);

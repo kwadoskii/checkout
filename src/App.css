@@ -34,3 +34,9 @@
 .card.mb-5.col-md-4.col-sm-6.card-shadow:hover {
   border: 2px solid darkgoldenrod;
 }
+
+.success-logo {
+  color: green;
+  display: block;
+  font-size: 4em;
+}
