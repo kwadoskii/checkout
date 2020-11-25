@@ -19,6 +19,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [localTotalAmount, setLocalTotalAmount] = useState(totalPrice);
   const [receiptUrl, setReceiptUrl] = useState("");
 
   totalPrice = totalPrice.toLocaleString("en", {
@@ -53,7 +54,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
         <div className="col-md-4 mr-auto ml-auto bg-white p-5 rounded card-shadow">
           <i className="fas fa-check-circle text-center my-4 success-logo "></i>
           <h3 className="font-weight-lighter text-center mt-4">Payment Successful!</h3>
-          <p className="text-muted text-center mb-4">{`We've processed your charge for ${totalPrice}`}</p>
+          <p className="text-muted text-center mb-4">{`We've processed your payment of $${localTotalAmount}`}</p>
           <div className="row">
             <div className="ml-auto">
               <a href={receiptUrl} target="_blank">
@@ -118,7 +119,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
         </div>
 
         <Button
-          className="btn-success col-md-6 offset-md-3 p-2 my-3 order-button"
+          className="btn-success col-md-6 offset-md-3 p-2 my-3"
           disabled={loading}
           name="pay"
           type="submit"
