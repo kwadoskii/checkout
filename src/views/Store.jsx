@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import propTypes from "prop-types";
 
-import productApi from "../services/productService";
 import Product from "../components/Product";
+import productApi from "../services/productService";
 
-export default function Store({ history, handleCart }) {
+export default function Store({ handleCart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -34,3 +35,7 @@ export default function Store({ history, handleCart }) {
     </div>
   );
 }
+
+Store.propTypes = {
+  handleCart: propTypes.func,
+};

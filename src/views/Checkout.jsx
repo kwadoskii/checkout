@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
 import { StripeProvider, Elements } from "react-stripe-elements";
+import propTypes from "prop-types";
 
 import CheckoutForm from "./CheckoutForm";
-import { Redirect } from "react-router-dom";
 
-export default function Checkout({ cart, clearCart, history, totalPrice }) {
+export default function Checkout({ clearCart, history, totalPrice }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // if (cart.length === 0) return <Redirect to="/" />;
-  // const totalPrice = history.location.state.totalPrice;
 
   return (
     <>
@@ -23,3 +20,9 @@ export default function Checkout({ cart, clearCart, history, totalPrice }) {
     </>
   );
 }
+
+Checkout.propTypes = {
+  clearCart: propTypes.func,
+  history: propTypes.object,
+  totalPrice: propTypes.number,
+};

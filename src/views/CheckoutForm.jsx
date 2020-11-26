@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   CardCVCElement,
@@ -6,21 +6,20 @@ import {
   CardNumberElement,
   injectStripe,
 } from "react-stripe-elements";
+import propTypes from "prop-types";
 
 import Button from "../components/Button";
 import logger from "../services/logService";
 import paymentApi from "../services/paymentService";
 
 const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
-  useEffect(() => {
-    if (!totalPrice) history.push("/");
-  }, []);
-
+  const [receiptUrl, setReceiptUrl] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [localTotalAmount, setLocalTotalAmount] = useState(totalPrice);
-  const [receiptUrl, setReceiptUrl] = useState("");
+  const [localTotalAmount] = useState(totalPrice);
+
+  if (!totalPrice && receiptUrl === "") history.push("/");
 
   totalPrice = totalPrice.toLocaleString("en", {
     minimumFractionDigits: 2,
@@ -41,7 +40,8 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
       setReceiptUrl(data.charge.receipt_url);
       clearCart();
     } catch (error) {
-      console.log(error);
+      logger.init();
+      logger.log(error);
     }
 
     setLoading(false);
@@ -127,7 +127,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
         <div className="form-row mt-3">
           <Button
             classes="btn-success col-md-6 offset-md-3 p-2 my-3"
-            disabled={loading}
+            disabled={totalPrice > 0 && loading}
             name={
               !loading ? (
                 "PAY"
@@ -151,3 +151,8 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
 };
 
 export default injectStripe(CheckoutForm);
+
+CheckoutForm.propTypes = {
+  clearCart: propTypes.func,
+  totalPrice: propTypes.number,
+};

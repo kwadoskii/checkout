@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from "prop-types";
 
 import Button from "./Button";
 import currencyFormatter from "../helpers/currencyFormatter";
@@ -35,7 +36,6 @@ export default function Product({ data, handleCart }) {
             {data.title.length > 55 ? data.title.substring(0, 55) + "..." : data.title}
           </p>
           <h4>{currencyFormatter(data.price)}</h4>
-          {/* <p className="card-text">{data.description.substring(0, 100)}</p> */}
         </div>
 
         <Button name="ADD TO CART" onClick={handleCart} />
@@ -43,3 +43,8 @@ export default function Product({ data, handleCart }) {
     </div>
   );
 }
+
+Product.propTypes = {
+  data: propTypes.object,
+  handleCart: propTypes.func,
+};

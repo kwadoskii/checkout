@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from "react";
+import propTypes from "prop-types";
 
 import Button from "../components/Button";
 import formatCurrency from "../helpers/currencyFormatter";
@@ -6,9 +7,9 @@ import formatCurrency from "../helpers/currencyFormatter";
 export default function Cart({
   cart,
   clearCart,
-  increaseItem,
   decreaseItem,
   history,
+  increaseItem,
   removeFromCart,
   totalPrice,
 }) {
@@ -22,11 +23,13 @@ export default function Cart({
         <h3 className="font-weight-lighter text-center">My cart</h3>
         <div className="row">
           <div className="ml-auto pr-4">
-            <Button
-              classes="btn-outline-danger"
-              name="REMOVE ALL"
-              onClick={() => clearCart()}
-            />
+            {cart.length > 1 && (
+              <Button
+                classes="btn-outline-danger"
+                name="REMOVE ALL"
+                onClick={() => clearCart()}
+              />
+            )}
           </div>
           <div className="col-md-12">
             {cart.map((c, i) => (
@@ -113,3 +116,12 @@ export default function Cart({
     </div>
   );
 }
+
+Cart.propTypes = {
+  cart: propTypes.array,
+  clearCart: propTypes.func,
+  decreaseItem: propTypes.func,
+  increaseItem: propTypes.func,
+  removeFromCart: propTypes.func,
+  totalPrice: propTypes.number,
+};
