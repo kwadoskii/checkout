@@ -67,7 +67,7 @@ const CheckoutForm = ({ clearCart, history, stripe, totalPrice }) => {
             </div>
             <div className="mr-auto">
               <Link to="/">
-                <Button name="Back TO STORE" classes="btn-sm btn-link" />
+                <Button name="BACK TO STORE" classes="btn-sm btn-link" />
               </Link>
             </div>
           </div>
